@@ -1,1 +1,1 @@
-# Azure Deployment Template for Network Configurations
+# Azure Deployment Templates for Network Configurations
