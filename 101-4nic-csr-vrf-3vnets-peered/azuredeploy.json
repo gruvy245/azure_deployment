@@ -640,50 +640,6 @@
             }
         },
         {
-            "type": "Microsoft.Network/routeTables",
-            "apiVersion": "2019-04-01",
-            "name": "[parameters('rt_prod_name')]",
-            "location": "[resourceGroup().location]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnet_prod_name'))]"
-            ],
-            "properties": {
-                "disableBgpRoutePropagation": true,
-                "routes": [
-                    {
-                        "name": "on-prem-route",
-                        "properties": {
-                            "addressPrefix": "10.0.0.12/30",
-                            "nextHopType": "VirtualAppliance",
-                            "nextHopIpAddress": "10.210.128.20"
-                        }
-                    }
-                ]
-            }
-        },
-        {
-            "type": "Microsoft.Network/routeTables",
-            "apiVersion": "2019-04-01",
-            "name": "[parameters('rt_stage_name')]",
-            "location": "[resourceGroup().location]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnet_stage_name'))]"
-            ],
-            "properties": {
-                "disableBgpRoutePropagation": true,
-                "routes": [
-                    {
-                        "name": "on-prem",
-                        "properties": {
-                            "addressPrefix": "10.0.0.12/30",
-                            "nextHopType": "VirtualAppliance",
-                            "nextHopIpAddress": "10.210.128.52"
-                        }
-                    }
-                ]
-            }
-        },
-        {
             "type": "Microsoft.Network/virtualNetworks/subnets",
             "apiVersion": "2019-04-01",
             "name": "[concat(parameters('vnet_hub_name'), '/hub-prod-ext')]",
@@ -1314,6 +1270,50 @@
                 "enableIPForwarding": true,
                 "primary": false,
                 "tapConfigurations": []
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables",
+            "apiVersion": "2019-04-01",
+            "name": "[parameters('rt_prod_name')]",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnet_prod_name'))]"
+            ],
+            "properties": {
+                "disableBgpRoutePropagation": true,
+                "routes": [
+                    {
+                        "name": "on-prem-route",
+                        "properties": {
+                            "addressPrefix": "10.0.0.12/30",
+                            "nextHopType": "VirtualAppliance",
+                            "nextHopIpAddress": "10.210.128.20"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables",
+            "apiVersion": "2019-04-01",
+            "name": "[parameters('rt_stage_name')]",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnet_stage_name'))]"
+            ],
+            "properties": {
+                "disableBgpRoutePropagation": true,
+                "routes": [
+                    {
+                        "name": "on-prem",
+                        "properties": {
+                            "addressPrefix": "10.0.0.12/30",
+                            "nextHopType": "VirtualAppliance",
+                            "nextHopIpAddress": "10.210.128.52"
+                        }
+                    }
+                ]
             }
         },
         {
