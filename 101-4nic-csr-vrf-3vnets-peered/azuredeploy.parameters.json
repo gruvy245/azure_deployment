@@ -1,0 +1,92 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "adminUsername": {
+          "type": "string"
+      },
+      "adminPassword": {
+          "type": "securestring"
+      },
+      "nva_csr": {
+          "defaultValue": "hub-csr-001",
+          "type": "string"
+      },
+      "rt_prod_name": {
+          "defaultValue": "hub-rt",
+          "type": "string"
+      },
+      "rt_stage_name": {
+          "defaultValue": "stage-rt",
+          "type": "string"
+      },
+      "vnet_prod_name": {
+          "defaultValue": "prod-vnet",
+          "type": "string"
+      },
+      "vnet_stage_name": {
+          "defaultValue": "stage-vnet",
+          "type": "string"
+      },
+      "vm_prod_name": {
+          "defaultValue": "prod-linux01",
+          "type": "string"
+      },
+      "vm_stage_name": {
+          "defaultValue": "stage-linux01",
+          "type": "string"
+      },
+      "nic0_nva_csr_name": {
+          "defaultValue": "hub-csr-001-nic0",
+          "type": "string"
+      },
+      "nic1_nva_csr_name": {
+          "defaultValue": "hub-csr-001-nic1",
+          "type": "string"
+      },
+      "nic2_nva_csr_name": {
+          "defaultValue": "hub-csr-001-nic2",
+          "type": "string"
+      },
+      "nic3_nva_csr_name": {
+          "defaultValue": "hub-csr-001-nic3",
+          "type": "string"
+      },
+      "sa_name": {
+          "defaultValue": "pgstoragediag31",
+          "type": "string"
+      },
+      "vnet_hub_name": {
+          "defaultValue": "hub-vnet",
+          "type": "string"
+      },
+      "nic1_vm_prod_name": {
+          "defaultValue": "prod-linux01-nic1",
+          "type": "string"
+      },
+      "nic1_vm_stage_name": {
+          "defaultValue": "stage-linux01-nic1",
+          "type": "string"
+      },
+      "nsg_hub_name": {
+          "defaultValue": "hub-nsg",
+          "type": "string"
+      },
+      "pip_prod_name": {
+          "defaultValue": "hub-csr-001-prod-pip",
+          "type": "string"
+      },
+      "pip_stage_name": {
+          "defaultValue": "hub-csr-001-stage-pip",
+          "type": "string"
+      },
+      "nsg_prod_vm_name": {
+          "defaultValue": "prod-linux01-nsg",
+          "type": "string"
+      },
+      "nsg_stage_vm_name": {
+          "defaultValue": "stage-linux01-nsg",
+          "type": "string"
+      }
+  }
+}
