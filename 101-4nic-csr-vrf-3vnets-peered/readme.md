@@ -7,7 +7,11 @@
 </a>
 
 
-This template creates a new VM with two NICs which connect to two different subnets within the same VNet.
+This template creates a the following:
+1. A hub or transit vnet with 1 Cisco CSR 1000v with 4 NICS
+2. A Production Vnet with a simple Linux VM for testing
+3. A Staging Vnet with a simple Linux VM for testing
+
 
 ## Tips
 1. If running under PowerShell you may update the **azuredeploy.parameters** file with the **allowedValues** for the subnet name of the Primary NIC and Secondary NIC for a nice dropdown list.

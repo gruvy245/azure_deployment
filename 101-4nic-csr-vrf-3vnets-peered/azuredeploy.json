@@ -95,7 +95,7 @@
             "type": "Microsoft.Network/networkSecurityGroups",
             "apiVersion": "2019-04-01",
             "name": "[parameters('nsg_hub_name')]",
-            "location": "eastus2",
+            "location": "[resourceGroup().location]",
             "properties": {
                 "securityRules": [
                     {
@@ -268,7 +268,7 @@
             "type": "Microsoft.Network/networkSecurityGroups",
             "apiVersion": "2019-04-01",
             "name": "[parameters('nsg_prod_vm_name')]",
-            "location": "eastus2",
+            "location": "[resourceGroup().location]",
             "properties": {
                 "securityRules": [],
                 "defaultSecurityRules": [
@@ -387,7 +387,7 @@
             "type": "Microsoft.Network/networkSecurityGroups",
             "apiVersion": "2019-04-01",
             "name": "[parameters('nsg_stage_vm_name')]",
-            "location": "eastus2",
+            "location": "[resourceGroup().location]",
             "properties": {
                 "securityRules": [],
                 "defaultSecurityRules": [
@@ -506,7 +506,7 @@
             "type": "Microsoft.Network/publicIPAddresses",
             "apiVersion": "2019-04-01",
             "name": "[parameters('pip_prod_name')]",
-            "location": "eastus2",
+            "location": "[resourceGroup().location]",
             "sku": {
                 "name": "Basic",
                 "tier": "Regional"
@@ -522,7 +522,7 @@
             "type": "Microsoft.Network/publicIPAddresses",
             "apiVersion": "2019-04-01",
             "name": "[parameters('pip_stage_name')]",
-            "location": "eastus2",
+            "location": "[resourceGroup().location]",
             "sku": {
                 "name": "Basic",
                 "tier": "Regional"
@@ -538,7 +538,7 @@
             "type": "Microsoft.Network/virtualNetworks",
             "apiVersion": "2019-04-01",
             "name": "[parameters('vnet_hub_name')]",
-            "location": "eastus2",
+            "location": "[resourceGroup().location]",
             "dependsOn": [],
             "properties": {
                 "addressSpace": {
@@ -585,7 +585,7 @@
             "type": "Microsoft.Network/virtualNetworks",
             "apiVersion": "2019-04-01",
             "name": "[parameters('vnet_prod_name')]",
-            "location": "eastus2",
+            "location": "[resourceGroup().location]",
             "dependsOn": [],
             "properties": {
                 "addressSpace": {
@@ -614,7 +614,7 @@
             "type": "Microsoft.Network/virtualNetworks",
             "apiVersion": "2019-04-01",
             "name": "[parameters('vnet_stage_name')]",
-            "location": "eastus2",
+            "location": "[resourceGroup().location]",
             "dependsOn": [],
             "properties": {
                 "addressSpace": {
@@ -643,7 +643,10 @@
             "type": "Microsoft.Network/routeTables",
             "apiVersion": "2019-04-01",
             "name": "[parameters('rt_prod_name')]",
-            "location": "eastus2",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnet_prod_name'))]"
+            ],
             "properties": {
                 "disableBgpRoutePropagation": true,
                 "routes": [
@@ -662,7 +665,10 @@
             "type": "Microsoft.Network/routeTables",
             "apiVersion": "2019-04-01",
             "name": "[parameters('rt_stage_name')]",
-            "location": "eastus2",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnet_stage_name'))]"
+            ],
             "properties": {
                 "disableBgpRoutePropagation": true,
                 "routes": [
@@ -859,7 +865,7 @@
             "type": "Microsoft.Storage/storageAccounts",
             "apiVersion": "2019-04-01",
             "name": "[parameters('sa_name')]",
-            "location": "eastus2",
+            "location": "[resourceGroup().location]",
             "sku": {
                 "name": "Standard_LRS",
                 "tier": "Standard"
@@ -890,7 +896,7 @@
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "2018-10-01",
             "name": "[parameters('vm_prod_name')]",
-            "location": "eastus2",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/networkInterfaces', parameters('nic1_vm_prod_name'))]",
                 "[resourceId('Microsoft.Storage/StorageAccounts', parameters('sa_name'))]"
@@ -948,7 +954,7 @@
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "2018-10-01",
             "name": "[parameters('vm_stage_name')]",
-            "location": "eastus2",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/networkInterfaces', parameters('nic1_vm_stage_name'))]",
                 "[resourceId('Microsoft.Storage/StorageAccounts', parameters('sa_name'))]"
@@ -1006,7 +1012,7 @@
             "type": "Microsoft.Network/networkInterfaces",
             "apiVersion": "2019-04-01",
             "name": "[parameters('nic1_vm_prod_name')]",
-            "location": "eastus2",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnet_prod_name'), 'prod-subnet1')]",
                 "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsg_prod_vm_name'))]"
@@ -1041,7 +1047,7 @@
             "type": "Microsoft.Network/networkInterfaces",
             "apiVersion": "2019-04-01",
             "name": "[parameters('nic1_vm_stage_name')]",
-            "location": "eastus2",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnet_stage_name'), 'stage-subnet1')]",
                 "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsg_stage_vm_name'))]"
@@ -1168,7 +1174,7 @@
             "type": "Microsoft.Network/networkInterfaces",
             "apiVersion": "2019-04-01",
             "name": "[parameters('nic0_nva_csr_name')]",
-            "location": "eastus2",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/publicIPAddresses', parameters('pip_prod_name'))]",
                 "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnet_hub_name'), 'hub-prod-ext')]",
@@ -1207,7 +1213,7 @@
             "type": "Microsoft.Network/networkInterfaces",
             "apiVersion": "2019-04-01",
             "name": "[parameters('nic1_nva_csr_name')]",
-            "location": "eastus2",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnet_hub_name'), 'hub-prod-int')]"
             ],
@@ -1241,7 +1247,7 @@
             "type": "Microsoft.Network/networkInterfaces",
             "apiVersion": "2019-04-01",
             "name": "[parameters('nic2_nva_csr_name')]",
-            "location": "eastus2",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/publicIPAddresses', parameters('pip_stage_name'))]",
                 "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnet_hub_name'), 'hub-stage-ext')]",
@@ -1280,7 +1286,7 @@
             "type": "Microsoft.Network/networkInterfaces",
             "apiVersion": "2019-04-01",
             "name": "[parameters('nic3_nva_csr_name')]",
-            "location": "eastus2",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnet_hub_name'), 'hub-stage-int')]"
             ],
@@ -1314,7 +1320,7 @@
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "2018-10-01",
             "name": "[parameters('nva_csr')]",
-            "location": "eastus2",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/networkInterfaces', parameters('nic0_nva_csr_name'))]",
                 "[resourceId('Microsoft.Network/networkInterfaces', parameters('nic1_nva_csr_name'))]",
