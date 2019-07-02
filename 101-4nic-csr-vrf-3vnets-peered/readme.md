@@ -1,9 +1,9 @@
 # Multi-NIC Virtual Machine Creation using Two Subnets
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https:%2F%2Fraw.githubusercontent.com%2Fgruvy245%2Fazure_deployment%2Fmaster%2F101-4nic-csr-vrf-3vnets-peered%2Fazuredeploy.json" target="_blank">
-    <img src="http:%2F%2Fazuredeploy.net%2Fdeploybutton.png"%2F>
+    <img src="http://azuredeploy.net/deploybutton.png"%2F>
 <%2Fa>
 <a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2Fgruvy245%2Fazure_deployment%2Fmaster%2F101-4nic-csr-vrf-3vnets-peered%2Fazuredeploy.json" target="_blank">
-    <img src="http:%2F%2Farmviz.io%2Fvisualizebutton.png"%2F>
+    <img src="http://armviz.io//visualizebutton.png"%2F>
 <%2Fa>
 
 
