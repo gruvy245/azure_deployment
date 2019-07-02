@@ -535,6 +535,44 @@
             }
         },
         {
+            "type": "Microsoft.Network/routeTables",
+            "apiVersion": "2019-04-01",
+            "name": "[parameters('rt_prod_name')]",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "disableBgpRoutePropagation": true,
+                "routes": [
+                    {
+                        "name": "on-prem-route",
+                        "properties": {
+                            "addressPrefix": "10.0.0.12/30",
+                            "nextHopType": "VirtualAppliance",
+                            "nextHopIpAddress": "10.210.128.20"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables",
+            "apiVersion": "2019-04-01",
+            "name": "[parameters('rt_stage_name')]",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "disableBgpRoutePropagation": true,
+                "routes": [
+                    {
+                        "name": "on-prem",
+                        "properties": {
+                            "addressPrefix": "10.0.0.12/30",
+                            "nextHopType": "VirtualAppliance",
+                            "nextHopIpAddress": "10.210.128.52"
+                        }
+                    }
+                ]
+            }
+        },
+        {
             "type": "Microsoft.Network/virtualNetworks",
             "apiVersion": "2019-04-01",
             "name": "[parameters('vnet_hub_name')]",
@@ -639,128 +677,6 @@
                 "enableVmProtection": false
             }
         },
-        {
-            "type": "Microsoft.Network/routeTables",
-            "apiVersion": "2019-04-01",
-            "name": "[parameters('rt_prod_name')]",
-            "location": "[resourceGroup().location]",
-            "properties": {
-                "disableBgpRoutePropagation": true,
-                "routes": [
-                    {
-                        "name": "on-prem-route",
-                        "properties": {
-                            "addressPrefix": "10.0.0.12/30",
-                            "nextHopType": "VirtualAppliance",
-                            "nextHopIpAddress": "10.210.128.20"
-                        }
-                    }
-                ]
-            }
-        },
-        {
-            "type": "Microsoft.Network/routeTables",
-            "apiVersion": "2019-04-01",
-            "name": "[parameters('rt_stage_name')]",
-            "location": "[resourceGroup().location]",
-            "properties": {
-                "disableBgpRoutePropagation": true,
-                "routes": [
-                    {
-                        "name": "on-prem",
-                        "properties": {
-                            "addressPrefix": "10.0.0.12/30",
-                            "nextHopType": "VirtualAppliance",
-                            "nextHopIpAddress": "10.210.128.52"
-                        }
-                    }
-                ]
-            }
-        },
-        {
-            "type": "Microsoft.Network/virtualNetworks/subnets",
-            "apiVersion": "2019-04-01",
-            "name": "[concat(parameters('vnet_hub_name'), '/hub-prod-ext')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnet_hub_name'))]"
-            ],
-            "properties": {
-                "addressPrefix": "10.210.128.0/28",
-                "delegations": []
-            }
-        },
-        {
-            "type": "Microsoft.Network/virtualNetworks/subnets",
-            "apiVersion": "2019-04-01",
-            "name": "[concat(parameters('vnet_hub_name'), '/hub-prod-int')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnet_hub_name'))]"
-            ],
-            "properties": {
-                "addressPrefix": "10.210.128.16/28",
-                "serviceEndpoints": [],
-                "delegations": []
-            }
-        },
-        {
-            "type": "Microsoft.Network/virtualNetworks/subnets",
-            "apiVersion": "2019-04-01",
-            "name": "[concat(parameters('vnet_hub_name'), '/hub-stage-ext')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnet_hub_name'))]"
-            ],
-            "properties": {
-                "addressPrefix": "10.210.128.32/28",
-                "delegations": []
-            }
-        },
-        {
-            "type": "Microsoft.Network/virtualNetworks/subnets",
-            "apiVersion": "2019-04-01",
-            "name": "[concat(parameters('vnet_hub_name'), '/hub-stage-int')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnet_hub_name'))]"
-            ],
-            "properties": {
-                "addressPrefix": "10.210.128.48/28",
-                "delegations": []
-            }
-        },
-        {
-            "type": "Microsoft.Network/virtualNetworks/subnets",
-            "apiVersion": "2019-04-01",
-            "name": "[concat(parameters('vnet_prod_name'), '/prod-subnet1')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnet_prod_name'))]",
-                "[resourceId('Microsoft.Network/routeTables', parameters('rt_prod_name'))]"
-            ],
-            "properties": {
-                "addressPrefix": "10.210.132.0/25",
-                "routeTable": {
-                    "id": "[resourceId('Microsoft.Network/routeTables', parameters('rt_prod_name'))]"
-                },
-                "serviceEndpoints": [],
-                "delegations": []
-            }
-        },
-        {
-            "type": "Microsoft.Network/virtualNetworks/subnets",
-            "apiVersion": "2019-04-01",
-            "name": "[concat(parameters('vnet_stage_name'), '/stage-subnet1')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnet_stage_name'))]",
-                "[resourceId('Microsoft.Network/routeTables', parameters('rt_stage_name'))]"
-            ],
-            "properties": {
-                "addressPrefix": "10.210.133.0/25",
-                "routeTable": {
-                    "id": "[resourceId('Microsoft.Network/routeTables', parameters('rt_stage_name'))]"
-                },
-                "serviceEndpoints": [],
-                "delegations": []
-            }
-        },
-
         {
             "type": "Microsoft.Network/networkSecurityGroups/securityRules",
             "apiVersion": "2019-04-01",
